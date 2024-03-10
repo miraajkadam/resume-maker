@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.resume {
+  width: 80%;
+  margin: 20px auto;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: 0 10px 38px 0 rgba(0, 0, 0, 0.3);
+  padding: 0.8rem;
+}
+.resume .resume__name {
+  font-size: 1.6rem;
+  text-align: center;
+}
+.resume .resume__name h1 {
+  margin: 0.2rem;
+}
+.resume hr {
+  margin: 0.1rem;
+}
+.resume .resume__contact {
+  text-align: center;
+}
+.resume .resume__summary p {
+  margin: 0.6rem;
+  text-align: justify;
+}
+.resume .resume__work__history .resume__work__history__section {
+  margin: 0 0.9rem;
+  text-align: justify;
+}
+.resume .resume__work__history .resume__work__history__section ul {
+  padding: 0 2rem;
+}

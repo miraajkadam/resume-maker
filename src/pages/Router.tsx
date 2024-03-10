@@ -1,42 +1,25 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { useAuth } from '../hooks/use-auth'
+import { Fragment } from 'react/jsx-runtime'
+import Edit from './Edit'
 import Login from './Login'
+import Navbar from '../components/Navbar'
 import Root from './Root'
 import View from './View'
-import Edit from './Edit'
 
 const Router = () => {
-  const { authed, logout } = useAuth()
-  console.log(authed)
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Root />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/view' element={<View />} />
-        <Route path='/Edit' element={<Edit />} />
-      </Routes>
-      {authed ? (
-        <div className='d-grid mt-5'>
-          <button
-            className='btn-danger'
-            onClick={() => {
-              logout()
-            }}
-          >
-            Sign out
-          </button>
-        </div>
-      ) : (
-        <div className='d-grid mt-5'>
-          <button className='btn-dark' onClick={() => {}}>
-            Sign in
-          </button>
-        </div>
-      )}
-    </BrowserRouter>
+    <Fragment>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Root />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/view' element={<View />} />
+          <Route path='/Edit' element={<Edit />} />
+        </Routes>
+      </BrowserRouter>
+    </Fragment>
   )
 }
 
