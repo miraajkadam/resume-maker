@@ -1,5 +1,10 @@
-function App() {
-  return <h1>Hello</h1>
-}
+import { AuthProvider } from './hooks/use-auth'
+import Router from './pages/Router'
+
+const App = () => (
+  <AuthProvider>
+    <Router />
+  </AuthProvider>
+)
 
 export default App
