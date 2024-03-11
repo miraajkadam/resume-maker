@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
 import Edit from './Edit'
@@ -7,7 +7,7 @@ import Root from './Root'
 import View from './View'
 
 const Router = () => (
-  <BrowserRouter>
+  <HashRouter>
     <Navbar />
     <Routes>
       <Route path='/' element={<Root />} />
@@ -15,7 +15,7 @@ const Router = () => (
       <Route path='/view' element={<View />} />
       <Route path='/Edit' element={<Edit />} />
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 )
 
 export default Router
