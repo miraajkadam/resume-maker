@@ -1,0 +1,82 @@
+.save__button {
+  margin-left: auto;
+}
+
+.resume {
+  width: 80%;
+  margin: 20px auto;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: 0 10px 38px 0 rgba(0, 0, 0, 0.3);
+  padding: 0.8rem;
+
+  .edit__container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  .resume__name__container {
+    .resume__name {
+      font-size: 2.6rem;
+      text-align: center;
+      font-weight: 800;
+    }
+  }
+
+  .resume__summary__container {
+    .resume__summary__inputs {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+
+      .resume__summary {
+        margin: 0 0.4rem;
+      }
+
+      .resume__summary__address {
+        width: 40%;
+      }
+
+      .resume__summary__number {
+        width: 20%;
+      }
+
+      .resume__summary__email {
+        width: 20%;
+      }
+    }
+  }
+
+  .resume__professional__summary__container {
+    width: 100%;
+
+    .resume__professional__summary {
+      textarea {
+        width: 96%;
+        margin: 0 0.7rem;
+        resize: vertical;
+      }
+    }
+  }
+
+  .resume__work__history__container {
+    width: 100%;
+
+    textarea {
+      width: 96%;
+      margin: 0 0.7rem;
+      resize: vertical;
+    }
+  }
+
+  .resume__education__container {
+    width: 100%;
+
+    // .resume__education {
+    //   input[]
+    // }
+  }
+}

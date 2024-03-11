@@ -14,6 +14,22 @@ const Navbar = () => {
           <button
             className='btn-danger'
             onClick={() => {
+              navigate('/edit')
+            }}
+          >
+            Edit Resume
+          </button>
+          <button
+            className='btn-danger'
+            onClick={() => {
+              navigate('/view')
+            }}
+          >
+            View Resume
+          </button>
+          <button
+            className='btn-danger'
+            onClick={() => {
               logout()
             }}
           >
