@@ -29,7 +29,7 @@ const Navbar = (props: any) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant='h6' sx={{ my: 2 }}>
-        MUI
+        Resume Maker
       </Typography>
       <Divider />
       {authed ? (
@@ -73,7 +73,7 @@ const Navbar = (props: any) => {
             <ListItemButton
               sx={{ textAlign: 'center' }}
               onClick={() => {
-                logout()
+                navigate('/login')
               }}
             >
               <ListItemText primary={'Sign In'} />
