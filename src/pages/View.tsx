@@ -1,4 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
+import { useAuth } from '../hooks/use-auth'
 import {
   resume__address,
   resume__education,
@@ -35,6 +37,8 @@ const View = () => {
     }[]
   >([])
 
+  const { authed } = useAuth()
+
   useEffect(() => {
     localStorageGetAndSetState(resume__name, setName)
     localStorageGetAndSetState(resume__email, setEmail)
@@ -45,7 +49,7 @@ const View = () => {
     localStorageGetParseAndSetState<typeof educations>(resume__education, setEducations)
   }, [])
 
-  return (
+  return authed ? (
     <div className='resume'>
       <div className='resume__name'>
         <h1>{name}</h1>
@@ -86,7 +90,7 @@ const View = () => {
         <h2>Education</h2>
 
         {educations.map((education, index) => (
-          <div className='resume__education__item'>
+          <div className='resume__education__item' key={index}>
             <h3>
               {education.university} - {education.degree} - {education.year}
             </h3>
@@ -95,6 +99,8 @@ const View = () => {
         ))}
       </div>
     </div>
+  ) : (
+    <Navigate to='/' replace />
   )
 }
 

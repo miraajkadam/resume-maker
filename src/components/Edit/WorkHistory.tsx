@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 const WorkHistory = ({
   descriptions,
@@ -7,6 +8,7 @@ const WorkHistory = ({
   tenure,
   title,
   saveWorkHistory,
+  removeWorkHistory,
   index,
 }: {
   descriptions: string[]
@@ -15,6 +17,7 @@ const WorkHistory = ({
   location: string
   index: number
   saveWorkHistory: (title: string, tenure: string, location: string, descriptions: string[]) => void
+  removeWorkHistory: (index: number) => void
 }) => {
   const [workDescriptions, setWorkDescriptions] = useState<string[]>(descriptions)
   const [workTitle, setWorkTitle] = useState<string>(title)
@@ -22,7 +25,7 @@ const WorkHistory = ({
   const [workLocation, setWorkLocation] = useState<string>(location)
 
   return (
-    <Box sx={{ margin: '20px 0', display: 'flex', flexDirection: 'column' }}>
+    <Box key={index} sx={{ margin: '20px 0', display: 'flex', flexDirection: 'column' }}>
       <Typography
         variant='h5'
         sx={{
@@ -83,24 +86,47 @@ const WorkHistory = ({
       </Typography>
 
       {workDescriptions.map((description, index) => (
-        <textarea
-          key={index}
-          rows={2}
-          placeholder='Description'
-          value={workDescriptions[index]}
-          onChange={e => {
-            const updatedDescription = [
-              ...workDescriptions.slice(0, index),
-              e.target.value,
-              ...workDescriptions.slice(index + 1),
-            ]
+        <Fragment key={index}>
+          <textarea
+            key={index}
+            rows={2}
+            placeholder='Description'
+            value={description}
+            onChange={e => {
+              const updatedDescription = [
+                ...workDescriptions.slice(0, index),
+                e.target.value,
+                ...workDescriptions.slice(index + 1),
+              ]
 
-            setWorkDescriptions(updatedDescription)
-          }}
-          style={{
-            marginBottom: 2,
-          }}
-        ></textarea>
+              setWorkDescriptions(updatedDescription)
+            }}
+            style={{
+              marginBottom: 2,
+            }}
+          ></textarea>
+          <Button
+            variant='outlined'
+            color='error'
+            onClick={() => {
+              const updatedDescriptions = [
+                ...descriptions.slice(0, index),
+                ...descriptions.slice(index + 1, descriptions.length),
+              ]
+
+              setWorkDescriptions(updatedDescriptions)
+            }}
+            sx={{
+              marginBottom: 1,
+              marginTop: 1,
+              marginLeft: 'auto',
+              justifySelf: 'right',
+              padding: 0,
+            }}
+          >
+            <DeleteIcon />
+          </Button>
+        </Fragment>
       ))}
       <Box
         sx={{
@@ -114,16 +140,27 @@ const WorkHistory = ({
           onClick={() => {
             setWorkDescriptions([...workDescriptions, ''])
           }}
-          sx={{ marginLeft: 1, marginRight: 1 }}
+          color='success'
         >
           Add Description
         </Button>
         <Button
           variant='outlined'
+          className='save__button'
+          color='error'
+          onClick={() => {
+            removeWorkHistory(index)
+          }}
+          sx={{ marginLeft: 1 }}
+        >
+          Remove Work History
+        </Button>
+        <Button
+          variant='outlined'
+          sx={{ marginLeft: 1 }}
           onClick={() => {
             saveWorkHistory(workTitle, workTenure, workLocation, workDescriptions)
           }}
-          sx={{ marginLeft: 1, marginRight: 1 }}
         >
           Save Work History
         </Button>

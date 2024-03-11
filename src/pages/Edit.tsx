@@ -1,7 +1,9 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import Education from '../components/Edit/Education'
 import WorkHistory from '../components/Edit/WorkHistory'
+import { useAuth } from '../hooks/use-auth'
 import {
   resume__address,
   resume__education,
@@ -52,7 +54,9 @@ const Edit = () => {
     localStorageGetParseAndSetState<typeof educations>(resume__education, setEducations)
   }, [])
 
-  return (
+  const { user, authed } = useAuth()
+
+  return authed && user?.isAdmin ? (
     <Box
       sx={{
         width: '80%',
@@ -228,6 +232,14 @@ const Edit = () => {
 
               setWorkHistory(updatedWorkHistory)
             }}
+            removeWorkHistory={(removalIndex: number) => {
+              const updatedWorkHistories = [
+                ...workHistory.slice(0, removalIndex),
+                ...workHistory.slice(removalIndex + 1, workHistory.length),
+              ]
+
+              setWorkHistory(updatedWorkHistories)
+            }}
             index={index}
           />
         ))}
@@ -251,7 +263,8 @@ const Edit = () => {
                 },
               ])
             }}
-            sx={{ marginLeft: 1, marginRight: 1 }}
+            sx={{ marginLeft: 1 }}
+            color='success'
           >
             Add Work History
           </Button>
@@ -261,9 +274,9 @@ const Edit = () => {
             onClick={() => {
               localStorage.setItem(resume__work__history, stringify(workHistory))
             }}
-            sx={{ marginLeft: 1, marginRight: 1 }}
+            sx={{ marginLeft: 1 }}
           >
-            Save
+            Save Work Histories
           </Button>
         </Box>
       </Box>
@@ -275,7 +288,7 @@ const Edit = () => {
           }}
           variant='h5'
         >
-          Work History
+          Education
         </Typography>
         {educations.map((education, index) => (
           <Education
@@ -299,6 +312,14 @@ const Edit = () => {
 
               setEducations(updatedEducation)
             }}
+            removeEducation={index => {
+              const updatedEducations = [
+                ...educations.slice(0, index),
+                ...educations.slice(index + 1, educations.length),
+              ]
+
+              setEducations(updatedEducations)
+            }}
           />
         ))}
 
@@ -311,6 +332,7 @@ const Edit = () => {
           <Button
             variant='outlined'
             sx={{ marginLeft: 1, marginRight: 1 }}
+            color='success'
             onClick={() => {
               setEducations([
                 ...educations,
@@ -333,11 +355,13 @@ const Edit = () => {
               localStorage.setItem(resume__education, stringify(educations))
             }}
           >
-            Save
+            Save All Educations
           </Button>
         </Box>
       </Box>
     </Box>
+  ) : (
+    <Navigate to='/view' replace />
   )
 }
 

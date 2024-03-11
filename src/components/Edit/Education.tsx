@@ -7,6 +7,7 @@ const Education = ({
   location: eduLocation,
   year: eduYear,
   saveEducation,
+  removeEducation,
   index,
 }: {
   university: string
@@ -15,6 +16,7 @@ const Education = ({
   year: string
   index: number
   saveEducation: (degree: string, university: string, location: string, year: string) => void
+  removeEducation: (removalIndex: number) => void
 }) => {
   const [degree, setDegree] = useState<string>(eduDegree)
   const [university, setUniversity] = useState<string>(eduUniversity)
@@ -30,7 +32,7 @@ const Education = ({
           marginBottom: 1,
         }}
       >
-        Work {index + 1}
+        Education {index + 1}
       </Typography>
       <TextField
         type='text'
@@ -86,19 +88,35 @@ const Education = ({
           setLocation(e.target.value)
         }}
       />
-      <Button
-        variant='outlined'
-        onClick={() => {
-          saveEducation(degree, university, location, year)
-        }}
+      <Box
         sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
           marginTop: 1,
-          marginLeft: 'auto',
-          justifySelf: 'right',
         }}
       >
-        Save Education
-      </Button>
+        <Button
+          variant='outlined'
+          onClick={() => {
+            removeEducation(index)
+          }}
+          color='error'
+          sx={{
+            marginRight: 1,
+          }}
+        >
+          Remove Education
+        </Button>
+        <Button
+          variant='outlined'
+          color='success'
+          onClick={() => {
+            saveEducation(degree, university, location, year)
+          }}
+        >
+          Save Education
+        </Button>
+      </Box>
     </Box>
   )
 }
