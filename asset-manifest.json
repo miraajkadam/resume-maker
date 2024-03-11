@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/resume-maker/static/css/main.529238cc.css",
+    "main.js": "/resume-maker/static/js/main.3bd25788.js",
+    "index.html": "/resume-maker/index.html",
+    "main.529238cc.css.map": "/resume-maker/static/css/main.529238cc.css.map",
+    "main.3bd25788.js.map": "/resume-maker/static/js/main.3bd25788.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.529238cc.css",
+    "static/js/main.3bd25788.js"
+  ]
+}
